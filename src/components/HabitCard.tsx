@@ -42,7 +42,7 @@ export function HabitCard({ habit, onToggle, onDelete, onNote, onUseFreeze }: Ha
     <>
       <Card className={cn(
         "group relative overflow-hidden transition-all duration-300 hover:shadow-lg",
-        isCompletedToday && "ring-2 ring-success/50"
+        isCompletedToday && "ring-2 ring-success/50 bg-success/5"
       )}>
         <div 
           className="absolute inset-0 opacity-5 transition-opacity group-hover:opacity-10"
@@ -52,20 +52,21 @@ export function HabitCard({ habit, onToggle, onDelete, onNote, onUseFreeze }: Ha
         <div className="relative p-4">
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3 flex-1 min-w-0">
+              {/* Large checkable button */}
               <button
                 onClick={() => onToggle(habit.id, today)}
                 className={cn(
-                  "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all duration-300",
+                  "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl transition-all duration-300 border-2",
                   isCompletedToday 
-                    ? "bg-success text-success-foreground scale-110" 
-                    : "bg-muted/50 text-muted-foreground hover:bg-primary/20 hover:text-primary"
+                    ? "bg-success text-success-foreground border-success scale-105 shadow-lg" 
+                    : "bg-card border-dashed border-muted-foreground/30 text-muted-foreground hover:border-primary hover:bg-primary/10 hover:text-primary hover:scale-105"
                 )}
-                style={!isCompletedToday ? { backgroundColor: `${habit.color}20`, color: habit.color } : {}}
+                title={isCompletedToday ? "Mark as incomplete" : "Mark as complete"}
               >
                 {isCompletedToday ? (
-                  <Check className="h-6 w-6" />
+                  <Check className="h-7 w-7" strokeWidth={3} />
                 ) : (
-                  <IconComponent className="h-6 w-6" />
+                  <IconComponent className="h-6 w-6" style={{ color: habit.color }} />
                 )}
               </button>
               
@@ -85,6 +86,11 @@ export function HabitCard({ habit, onToggle, onDelete, onNote, onUseFreeze }: Ha
                       <Flame className="h-3 w-3" />
                       {habit.streak} day streak
                     </div>
+                  )}
+                  {isCompletedToday && (
+                    <Badge variant="secondary" className="bg-success/10 text-success text-xs">
+                      Done
+                    </Badge>
                   )}
                 </div>
               </div>

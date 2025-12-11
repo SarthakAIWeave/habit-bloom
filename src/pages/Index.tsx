@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Header } from '@/components/Header';
 import { HabitCard } from '@/components/HabitCard';
 import { CreateHabitDialog } from '@/components/CreateHabitDialog';
@@ -8,7 +9,9 @@ import { EmptyState } from '@/components/EmptyState';
 import { SmartReminders } from '@/components/SmartReminders';
 import { SocialFeatures } from '@/components/SocialFeatures';
 import { AnalyticsDashboard } from '@/components/AnalyticsDashboard';
+import { HabitFilters } from '@/components/HabitFilters';
 import { useHabits } from '@/hooks/useHabits';
+import { Habit } from '@/types/habit';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { LayoutGrid, CalendarDays, BarChart3 } from 'lucide-react';
@@ -24,6 +27,13 @@ export default function Index() {
     useStreakFreeze,
     addNote 
   } = useHabits();
+
+  const [filteredHabits, setFilteredHabits] = useState<Habit[]>(habits);
+
+  // Update filtered habits when habits change
+  useEffect(() => {
+    setFilteredHabits(habits);
+  }, [habits]);
 
   if (!loaded) {
     return (
@@ -45,7 +55,9 @@ export default function Index() {
             <div className="flex items-center justify-between flex-wrap gap-3">
               <div>
                 <h2 className="text-2xl font-bold text-foreground">Today's Habits</h2>
-                <p className="text-muted-foreground">Keep up the momentum!</p>
+                <p className="text-muted-foreground">
+                  {filteredHabits.filter(h => h.completions.some(c => c.date === new Date().toISOString().split('T')[0])).length} of {habits.length} completed today
+                </p>
               </div>
               <div className="flex items-center gap-2">
                 <SmartReminders habits={habits} />
@@ -70,19 +82,32 @@ export default function Index() {
                 </TabsTrigger>
               </TabsList>
 
-              <TabsContent value="habits" className="mt-6">
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {habits.map((habit) => (
-                    <HabitCard
-                      key={habit.id}
-                      habit={habit}
-                      onToggle={toggleCompletion}
-                      onDelete={deleteHabit}
-                      onNote={addNote}
-                      onUseFreeze={useStreakFreeze}
-                    />
-                  ))}
-                </div>
+              <TabsContent value="habits" className="mt-6 space-y-4">
+                {/* Filters */}
+                <HabitFilters 
+                  habits={habits} 
+                  onFilteredHabits={setFilteredHabits} 
+                />
+
+                {/* Habits Grid */}
+                {filteredHabits.length > 0 ? (
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {filteredHabits.map((habit) => (
+                      <HabitCard
+                        key={habit.id}
+                        habit={habit}
+                        onToggle={toggleCompletion}
+                        onDelete={deleteHabit}
+                        onNote={addNote}
+                        onUseFreeze={useStreakFreeze}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <Card className="p-8 text-center">
+                    <p className="text-muted-foreground">No habits match your filters</p>
+                  </Card>
+                )}
               </TabsContent>
 
               <TabsContent value="calendar" className="mt-6">
