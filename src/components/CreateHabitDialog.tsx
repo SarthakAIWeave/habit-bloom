@@ -17,6 +17,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card } from '@/components/ui/card';
 import { Habit, HabitCategory, HabitDifficulty, HABIT_TEMPLATES } from '@/types/habit';
 import { cn } from '@/lib/utils';
+import { TemplateCustomizeDialog } from './TemplateCustomizeDialog';
 
 interface CreateHabitDialogProps {
   onCreateHabit: (habit: Omit<Habit, 'id' | 'streak' | 'bestStreak' | 'completions' | 'createdAt' | 'streakFreezes'>) => void;
@@ -57,6 +58,8 @@ export function CreateHabitDialog({ onCreateHabit }: CreateHabitDialogProps) {
   const [category, setCategory] = useState<HabitCategory>('custom');
   const [difficulty, setDifficulty] = useState<HabitDifficulty>('medium');
   const [color, setColor] = useState(COLORS[0]);
+  const [selectedTemplate, setSelectedTemplate] = useState<typeof HABIT_TEMPLATES[0] | null>(null);
+  const [customizeOpen, setCustomizeOpen] = useState(false);
 
   const handleCreate = () => {
     if (!name.trim()) return;
@@ -78,7 +81,13 @@ export function CreateHabitDialog({ onCreateHabit }: CreateHabitDialogProps) {
   };
 
   const handleTemplateSelect = (template: typeof HABIT_TEMPLATES[0]) => {
-    onCreateHabit(template);
+    setSelectedTemplate(template);
+    setCustomizeOpen(true);
+  };
+
+  const handleTemplateCreate = (habit: any) => {
+    onCreateHabit(habit);
+    setCustomizeOpen(false);
     setOpen(false);
   };
 
@@ -241,6 +250,13 @@ export function CreateHabitDialog({ onCreateHabit }: CreateHabitDialogProps) {
           </TabsContent>
         </Tabs>
       </DialogContent>
+
+      <TemplateCustomizeDialog
+        open={customizeOpen}
+        onOpenChange={setCustomizeOpen}
+        template={selectedTemplate}
+        onSave={handleTemplateCreate}
+      />
     </Dialog>
   );
 }

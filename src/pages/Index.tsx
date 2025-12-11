@@ -5,6 +5,9 @@ import { HeatmapCalendar } from '@/components/HeatmapCalendar';
 import { StatsOverview } from '@/components/StatsOverview';
 import { BadgesSection } from '@/components/BadgesSection';
 import { EmptyState } from '@/components/EmptyState';
+import { SmartReminders } from '@/components/SmartReminders';
+import { SocialFeatures } from '@/components/SocialFeatures';
+import { AnalyticsDashboard } from '@/components/AnalyticsDashboard';
 import { useHabits } from '@/hooks/useHabits';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -39,12 +42,16 @@ export default function Index() {
           <EmptyState onCreateHabit={addHabit} />
         ) : (
           <>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between flex-wrap gap-3">
               <div>
                 <h2 className="text-2xl font-bold text-foreground">Today's Habits</h2>
                 <p className="text-muted-foreground">Keep up the momentum!</p>
               </div>
-              <CreateHabitDialog onCreateHabit={addHabit} />
+              <div className="flex items-center gap-2">
+                <SmartReminders habits={habits} />
+                <SocialFeatures stats={stats} />
+                <CreateHabitDialog onCreateHabit={addHabit} />
+              </div>
             </div>
 
             <Tabs defaultValue="habits" className="w-full">
@@ -59,7 +66,7 @@ export default function Index() {
                 </TabsTrigger>
                 <TabsTrigger value="stats" className="gap-2">
                   <BarChart3 className="h-4 w-4" />
-                  <span className="hidden sm:inline">Stats</span>
+                  <span className="hidden sm:inline">Analytics</span>
                 </TabsTrigger>
               </TabsList>
 
@@ -86,7 +93,7 @@ export default function Index() {
               </TabsContent>
 
               <TabsContent value="stats" className="mt-6 space-y-6">
-                <StatsOverview habits={habits} stats={stats} />
+                <AnalyticsDashboard habits={habits} stats={stats} />
                 <BadgesSection earnedBadges={stats.badges} />
               </TabsContent>
             </Tabs>
