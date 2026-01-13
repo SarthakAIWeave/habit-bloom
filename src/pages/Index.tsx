@@ -14,7 +14,8 @@ import { Habit } from '@/types/habit';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { LayoutGrid, CalendarDays, BarChart3 } from 'lucide-react';
-import { AchievementsDebugPanel } from '@/components/AchievementsDebugPanel';
+import { GamificationStats } from '@/components/GamificationStats';
+import { AchievementsSection } from '@/components/AchievementsSection';
 
 export default function Index() {
   const { 
@@ -53,7 +54,10 @@ export default function Index() {
       </Header>
       
       <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
+        {/* Gamification Stats - Shows XP, Level, Streak, Freezes */}
+        <GamificationStats />
+
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6 mt-6">
           <div className="w-full sm:w-auto">
             <h2 className="text-xl sm:text-2xl font-bold text-foreground">Today's Habits</h2>
             <p className="text-sm sm:text-base text-muted-foreground">
@@ -120,10 +124,9 @@ export default function Index() {
 
           <TabsContent value="stats" className="mt-6 space-y-6">
             <AnalyticsDashboard habits={habits} stats={stats} />
-            <BadgesSection earnedBadges={stats.badges} />
             
-            {/* Debug Panel - Shows all achievements for testing */}
-            <AchievementsDebugPanel />
+            {/* New comprehensive achievements section */}
+            <AchievementsSection />
           </TabsContent>
         </Tabs>
       </main>

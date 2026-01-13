@@ -1,16 +1,24 @@
 import React, { createContext, useContext, ReactNode } from 'react';
 import { useGamification as useGamificationHook } from '@/hooks/useGamification';
 
-const GamificationContext = createContext<ReturnType<typeof useGamificationHook> | undefined>(undefined);
+type GamificationContextType = ReturnType<typeof useGamificationHook>;
+
+const GamificationContext = createContext<GamificationContextType | null>(null);
 
 export const GamificationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const gamification = useGamificationHook();
-  
-  return (
-    <GamificationContext.Provider value={gamification}>
-      {children}
-    </GamificationContext.Provider>
-  );
+  try {
+    const gamification = useGamificationHook();
+    
+    return (
+      <GamificationContext.Provider value={gamification}>
+        {children}
+      </GamificationContext.Provider>
+    );
+  } catch (error) {
+    console.error('GamificationProvider error:', error);
+    // Still render children even if gamification fails
+    return <>{children}</>;
+  }
 };
 
 export const useGamification = () => {

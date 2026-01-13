@@ -325,9 +325,10 @@ export const useGamification = () => {
             break;
             
           case 'day_quality':
-            progress = prev.dayQuality?.quality === DayQuality.PERFECT 
-              ? (achievement.progress || 0) + 1 
-              : (achievement.progress || 0);
+            progress = achievement.progress || 0;
+            if (prev.dayQuality?.quality === DayQuality.PERFECT) {
+              progress += 1;
+            }
             completed = progress >= achievement.criteria.target;
             break;
             
