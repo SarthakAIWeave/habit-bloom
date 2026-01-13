@@ -1,0 +1,135 @@
+/* Professional Mode - Light Theme */
+:root[data-ui-mode="professional"][data-theme="light"] {
+  /* Base colors */
+  --pro-bg-primary: #f8f9fa;
+  --pro-bg-secondary: #ffffff;
+  --pro-bg-tertiary: #f1f3f4;
+  --pro-bg-elevated: #ffffff;
+  
+  /* Text colors */
+  --pro-text-primary: #1a1a2e;
+  --pro-text-secondary: #5f6368;
+  --pro-text-tertiary: #80868b;
+  --pro-text-muted: #9aa0a6;
+  
+  /* Border colors */
+  --pro-border-light: #e8eaed;
+  --pro-border-default: #dadce0;
+  --pro-border-strong: #c4c7c9;
+  
+  /* Accent colors - Slate/Indigo based */
+  --pro-accent-primary: #4f46e5;
+  --pro-accent-primary-hover: #4338ca;
+  --pro-accent-primary-subtle: #eef2ff;
+  --pro-accent-secondary: #64748b;
+  
+  /* Status colors - Muted */
+  --pro-success: #059669;
+  --pro-success-subtle: #ecfdf5;
+  --pro-success-border: #a7f3d0;
+  --pro-warning: #d97706;
+  --pro-warning-subtle: #fffbeb;
+  --pro-warning-border: #fde68a;
+  --pro-error: #dc2626;
+  --pro-error-subtle: #fef2f2;
+  --pro-error-border: #fecaca;
+  --pro-pending: #6b7280;
+  --pro-pending-subtle: #f9fafb;
+  
+  /* Interactive states */
+  --pro-hover-overlay: rgba(0, 0, 0, 0.04);
+  --pro-active-overlay: rgba(0, 0, 0, 0.08);
+  --pro-focus-ring: rgba(79, 70, 229, 0.4);
+  
+  /* Shadows */
+  --pro-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --pro-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --pro-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  
+  /* Chart colors */
+  --pro-chart-primary: #4f46e5;
+  --pro-chart-secondary: #64748b;
+  --pro-chart-success: #059669;
+  --pro-chart-grid: #e5e7eb;
+  --pro-chart-label: #6b7280;
+}
+
+/* Professional Mode - Dark Theme */
+:root[data-ui-mode="professional"][data-theme="dark"] {
+  /* Base colors */
+  --pro-bg-primary: #0f0f14;
+  --pro-bg-secondary: #1a1a24;
+  --pro-bg-tertiary: #242432;
+  --pro-bg-elevated: #1e1e2a;
+  
+  /* Text colors */
+  --pro-text-primary: #f0f0f5;
+  --pro-text-secondary: #a0a0b0;
+  --pro-text-tertiary: #707080;
+  --pro-text-muted: #505060;
+  
+  /* Border colors */
+  --pro-border-light: #2a2a3a;
+  --pro-border-default: #3a3a4a;
+  --pro-border-strong: #4a4a5a;
+  
+  /* Accent colors - Muted for dark mode */
+  --pro-accent-primary: #818cf8;
+  --pro-accent-primary-hover: #a5b4fc;
+  --pro-accent-primary-subtle: rgba(129, 140, 248, 0.1);
+  --pro-accent-secondary: #94a3b8;
+  
+  /* Status colors - Muted for dark mode */
+  --pro-success: #34d399;
+  --pro-success-subtle: rgba(52, 211, 153, 0.1);
+  --pro-success-border: rgba(52, 211, 153, 0.3);
+  --pro-warning: #fbbf24;
+  --pro-warning-subtle: rgba(251, 191, 36, 0.1);
+  --pro-warning-border: rgba(251, 191, 36, 0.3);
+  --pro-error: #f87171;
+  --pro-error-subtle: rgba(248, 113, 113, 0.1);
+  --pro-error-border: rgba(248, 113, 113, 0.3);
+  --pro-pending: #9ca3af;
+  --pro-pending-subtle: rgba(156, 163, 175, 0.1);
+  
+  /* Interactive states */
+  --pro-hover-overlay: rgba(255, 255, 255, 0.04);
+  --pro-active-overlay: rgba(255, 255, 255, 0.08);
+  --pro-focus-ring: rgba(129, 140, 248, 0.5);
+  
+  /* Shadows */
+  --pro-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pro-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --pro-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+  
+  /* Chart colors */
+  --pro-chart-primary: #818cf8;
+  --pro-chart-secondary: #94a3b8;
+  --pro-chart-success: #34d399;
+  --pro-chart-grid: #2a2a3a;
+  --pro-chart-label: #9ca3af;
+}
+
+/* Professional Mode Base Styles */
+[data-ui-mode="professional"] {
+  /* Typography */
+  --pro-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --pro-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  /* Spacing */
+  --pro-spacing-xs: 0.25rem;
+  --pro-spacing-sm: 0.5rem;
+  --pro-spacing-md: 1rem;
+  --pro-spacing-lg: 1.5rem;
+  --pro-spacing-xl: 2rem;
+  
+  /* Border radius - More subtle */
+  --pro-radius-sm: 4px;
+  --pro-radius-md: 6px;
+  --pro-radius-lg: 8px;
+  --pro-radius-full: 9999px;
+  
+  /* Transitions */
+  --pro-transition-fast: 120ms ease;
+  --pro-transition-normal: 200ms ease;
+}
